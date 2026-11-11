@@ -6,7 +6,7 @@ LD_FLAGS = -lX11
 SRC_DIR = src
 BUILD_DIR = src/build
 
-C_SRCS := $(shell find $(SRC_DIR) -type f -name '*.c');
+C_SRCS := $(shell find $(SRC_DIR) -type f -name '*.c')
 
 MAIN = $(BUILD_DIR)/main
 
