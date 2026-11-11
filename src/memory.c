@@ -13,7 +13,7 @@ uint8_t SP;
 // Stack , 16 16bit values only used to store addresses to return to after subroutine. ONLY ALLOWS 16 LEVELS OF NESTING
 uint16_t Stack[16];
 // Screen, pixel buffer 64*32
-uint8_t Screen[64*32];
+uint8_t Buffer[64*32];
 // counters
 uint8_t delayTimer;
 uint8_t soundTimer;
@@ -26,7 +26,7 @@ void initialise_memory(void) {
     }
     PC = PROGRAM_BASE;
     SP = 0;
-    for (int i = 0; i < 64*32; i++) Screen[i] = 0;
+    for (int i = 0; i < 64*32; i++) Buffer[i] = 0;
     delayTimer = 0;
     soundTimer = 0;
 

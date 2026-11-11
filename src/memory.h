@@ -19,7 +19,7 @@ extern uint8_t SP;
 // Stack , 16 16bit values only used to store addresses to return to after subroutine. ONLY ALLOWS 16 LEVELS OF NESTING
 extern uint16_t Stack[16];
 // Screen, pixel buffer 64*32
-extern uint8_t Screen[64*32];
+extern uint8_t Buffer[64*32];
 // counters
 extern uint8_t delayTimer;
 extern uint8_t soundTimer;

@@ -1,6 +1,6 @@
 CC = gcc
 
-CC_FLAGS = -Wall -Wextra -I./src
+CC_FLAGS = -I./src -I.
 LD_FLAGS = -lX11
 
 SRC_DIR = src
