@@ -13,20 +13,27 @@ uint8_t SP;
 // Stack , 16 16bit values only used to store addresses to return to after subroutine. ONLY ALLOWS 16 LEVELS OF NESTING
 uint16_t Stack[16];
 // Screen, pixel buffer 64*32
-uint8_t Buffer[64*32];
+uint8_t Buffer[64 * 32];
+// Keyboard key status
+uint8_t Keyboard[16];
 // counters
 uint8_t delayTimer;
 uint8_t soundTimer;
 
-void initialise_memory(void) {
-    for (int i = 0; i < 4096; i++) RAM[i] = 0;
-    for (int i = 0; i < 16; i++) {
+void initialise_memory(void)
+{
+    for (int i = 0; i < 4096; i++)
+        RAM[i] = 0;
+    for (int i = 0; i < 16; i++)
+    {
         V[i] = 0;
         Stack[i] = 0;
+        Keyboard[i] = 0;
     }
     PC = PROGRAM_BASE;
     SP = 0;
-    for (int i = 0; i < 64*32; i++) Buffer[i] = 0;
+    for (int i = 0; i < 64 * 32; i++)
+        Buffer[i] = 0;
     delayTimer = 0;
     soundTimer = 0;
 
