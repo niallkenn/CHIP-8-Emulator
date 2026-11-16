@@ -22,6 +22,8 @@ uint8_t Keyboard[16];
 // counters
 uint8_t delayTimer;
 uint8_t soundTimer;
+// size of rom program
+size_t ROM_Size;
 
 static  void init_sprites(void);
 
@@ -49,7 +51,7 @@ void initialise_memory(void)
 
     if (fptr == NULL) exit(1);
 
-    size_t bytes_read = fread(&RAM[0x200], 1, 4096 - 0x200, fptr);
+    ROM_Size = fread(&RAM[0x200], 1, 4096 - 0x200, fptr);
 
     fclose(fptr);
 }

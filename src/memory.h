@@ -2,6 +2,7 @@
 #define MEM_H
 
 #include <stdint.h>
+#include <stddef.h>
 
 // Start of all programs
 #define PROGRAM_BASE 0x200
@@ -25,6 +26,8 @@ extern uint8_t Keyboard[16];
 // counters
 extern uint8_t delayTimer;
 extern uint8_t soundTimer;
+// size of rom program
+extern size_t ROM_Size;
 
 void initialise_memory(void);
 
