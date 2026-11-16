@@ -10,7 +10,9 @@ int main(void) {
 
     srand(time(NULL));
 
-    while(1) update_canvas(canvas);
+    while (1) {
+        update_canvas(canvas);
+    }
 
     return 0;
 }

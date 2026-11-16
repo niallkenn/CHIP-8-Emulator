@@ -1,4 +1,7 @@
 #include "memory.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 // initialise
 uint8_t RAM[4096];
@@ -20,6 +23,8 @@ uint8_t Keyboard[16];
 uint8_t delayTimer;
 uint8_t soundTimer;
 
+static  void init_sprites(void);
+
 void initialise_memory(void)
 {
     for (int i = 0; i < 4096; i++)
@@ -37,6 +42,19 @@ void initialise_memory(void)
     delayTimer = 0;
     soundTimer = 0;
 
+    init_sprites();
+
+    FILE* fptr;
+    fptr = fopen("rom.ch8", "rb");
+
+    if (fptr == NULL) exit(1);
+
+    size_t bytes_read = fread(&RAM[0x200], 1, 4096 - 0x200, fptr);
+
+    fclose(fptr);
+}
+
+static void init_sprites(void) {
     // "0"
     RAM[0] = 0xF0;
     RAM[1] = 0x90;
