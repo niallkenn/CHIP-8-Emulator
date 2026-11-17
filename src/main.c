@@ -12,10 +12,24 @@ int main(void) {
 
     srand(time(NULL));
 
-    while (PC < ROM_Size + 0x200) {
-        //update_canvas(canvas);
-        decode_and_excecute(fetch());
-        PC += 2;
+    while (1) {
+        // 10 clock cycles, per frame
+        for (int i = 0; i < 10; i++) {
+            uint16_t instruction = fetch();
+            PC += 2;
+            decode_and_excecute(instruction);
+        }
+
+        if (delayTimer > 0) delayTimer--;
+        if (soundTimer > 0) soundTimer--;
+
+        update_canvas(canvas);
+        if (draw_flag == 1) {
+            update_screen();
+            draw_flag = 0;
+        }
+
+        usleep(16666); //  60 fps
     }
 
     return 0;

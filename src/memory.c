@@ -24,6 +24,8 @@ uint8_t delayTimer;
 uint8_t soundTimer;
 // size of rom program
 size_t ROM_Size;
+// re-draw screen flag
+uint8_t draw_flag;
 
 static  void init_sprites(void);
 
@@ -43,6 +45,7 @@ void initialise_memory(void)
         Buffer[i] = 0;
     delayTimer = 0;
     soundTimer = 0;
+    draw_flag = 0;
 
     init_sprites();
 

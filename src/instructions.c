@@ -5,7 +5,7 @@
 void _00E0(void) {
     for (int i = 0; i < 64 * 32; i++) Buffer[i] = 0;
 
-    fill_canvas(canvas, 0);
+    draw_flag = 1;
 }
 
 void _00EE(void) {
@@ -76,44 +76,27 @@ void _8xy4(uint8_t x, uint8_t y) {
 }
 
 void _8xy5(uint8_t x, uint8_t y) {
-    uint32_t diff = V[x] - V[y];
-
-    V[x] = diff;
-
-    if (V[x] >= V[y]) {
-        V[0xF] = 1; // NOT borrow
-    } else {
-        V[0xF] = 0; // NOT borrow
-    }
+    uint8_t not_borrow = (V[x] >= V[y]) ? 1 : 0;
+    V[x] -= V[y];
+    V[0xF] = not_borrow;
 }
 
 void _8xy6(uint8_t x, uint8_t y) {
-    V[x] = V[x] >> 1;
-    if (V[x] & 1) {
-        V[0xF] = 1;
-    } else {
-        V[0xF] = 0;
-    }
+    uint8_t lsb = V[x] & 0x1;
+    V[x] >>= 1;
+    V[0xF] = lsb;
 }
 
 void _8xy7(uint8_t x, uint8_t y) {
+    uint8_t not_borrow = (V[y] >= V[x]) ? 1 : 0;
     V[x] = V[y] - V[x];
-    if (V[y] >= V[x]) {
-        V[0xF] = 1;
-    } else {
-        V[0xF] = 0;
-    }
-
+    V[0xF] = not_borrow;
 }
 
 void _8xyE(uint8_t x, uint8_t y) {
-    V[x] = V[x] << 1;
-
-    if ((V[x] >> 7) & 1) {
-        V[0xF] = 1;
-    } else {
-        V[0xF] = 0;
-    }
+    uint8_t msb = (V[x] >> 7) & 0x1;
+    V[x] <<= 1;
+    V[0xF] = msb;
 }
 
 void _9xy0(uint8_t x, uint8_t y) {
@@ -136,6 +119,7 @@ void _Cxkk(uint8_t x, uint8_t kk) {
 
 void _Dxyn(uint8_t x, uint8_t y, uint8_t n) {
     V[0xF] = 0;
+    draw_flag = 1;
 
     for (int i = 0; i < n; i++) {
         uint8_t byte = RAM[I + i];

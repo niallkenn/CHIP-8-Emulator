@@ -28,6 +28,8 @@ extern uint8_t delayTimer;
 extern uint8_t soundTimer;
 // size of rom program
 extern size_t ROM_Size;
+// re-draw screen flag
+extern uint8_t draw_flag;
 
 void initialise_memory(void);
 
