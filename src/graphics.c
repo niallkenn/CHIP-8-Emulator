@@ -5,6 +5,8 @@ Canvas* canvas;
 
 void initialise_graphics(void) {
     canvas = create_canvas(640, 320);
+
+    XSelectInput(canvas->display, canvas->window, ExposureMask | KeyPressMask | KeyReleaseMask);
 }
 
 void update_screen(void) {

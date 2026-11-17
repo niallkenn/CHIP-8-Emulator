@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <stdio.h>
+#include "keyboard.h"
 
 int main(void) {
     initialise_memory();
@@ -28,6 +29,8 @@ int main(void) {
             update_screen();
             draw_flag = 0;
         }
+
+        handle_keys();
 
         usleep(16666); //  60 fps
     }
