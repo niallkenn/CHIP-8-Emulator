@@ -31,6 +31,6 @@ extern size_t ROM_Size;
 // re-draw screen flag
 extern uint8_t draw_flag;
 
-void initialise_memory(void);
+void initialise_memory(const char* rom);
 
 #endif // MEM_H

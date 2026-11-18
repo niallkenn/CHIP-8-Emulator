@@ -29,7 +29,7 @@ uint8_t draw_flag;
 
 static  void init_sprites(void);
 
-void initialise_memory(void)
+void initialise_memory(const char* rom)
 {
     for (int i = 0; i < 4096; i++)
         RAM[i] = 0;
@@ -50,9 +50,15 @@ void initialise_memory(void)
     init_sprites();
 
     FILE* fptr;
-    fptr = fopen("rom.ch8", "rb");
+    char full_path[64];
 
-    if (fptr == NULL) exit(1);
+    snprintf(full_path, sizeof(full_path), "roms/%s", rom);
+    
+    fptr = fopen(full_path, "rb");
+
+    if (fptr == NULL) {
+        printf("ROM not found.\n");
+    }
 
     ROM_Size = fread(&RAM[0x200], 1, 4096 - 0x200, fptr);
 
